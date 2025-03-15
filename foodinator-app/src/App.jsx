@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/global.css';
 import './App.css';
+import Question from './components/question';
 
 function App() {
   // State to track the current page/content
@@ -17,23 +18,23 @@ function App() {
    * }
    * 
    */
-  const [questionData, setQuestionData] = useState(null); //
+  const [questionData, setQuestionData] = useState(null); // Stores question data
 
   /**
    * UseEffect to get question data from API
    */
-  useEffect(()=>{
-    fetch('http://localhost:5000/example',{
-      'methods':'GET',
-      headers : {
-        'Content-Type':'application/json'
+  useEffect(() => {
+    fetch('http://localhost:5000/example', {
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(response => setQuestionData(response))
-    .catch(error => console.log(error))
+      .then(response => response.json())
+      .then(data => setQuestionData(data))
+      .catch(error => console.log(error))
 
-  },[]) //in '[]' we can set when we make this get request?
+  }, []) //in '[]' we can set when we make this get request?
 
   // Handle moving to the next page
   const handleNext = () => {
@@ -57,11 +58,7 @@ function App() {
       )}
 
       {currentPage === 'question' && (
-        <div className="question-page">
-          <h1>Question Page</h1>
-          <button onClick={handleLocation}>Use your current location.</button>
-
-        </div>
+        <Question question={questionData.question} options={questionData.options} />
       )}
     </div>
   );

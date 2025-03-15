@@ -1,16 +1,14 @@
 import ButtonList from "./buttonList";
 
-const Question = ({ items }) => {
-  return (
-    <div className="question-prompt">
-      <p className="question-text">
-        Question?
-      </p>
-      <div className="question-buttons-list">
-        <ButtonList items={items} />
-      </div>
-    </div>
-  );
+const Question = ({ question, options }) => {
+    return (
+        <div className="question-prompt">
+            <p className="question-text">{question}</p>
+            <div className="question-buttons-list">
+                <ButtonList items={options} />
+            </div>
+        </div>
+    );
 };
 
 export default Question;
