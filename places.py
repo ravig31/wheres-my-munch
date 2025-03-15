@@ -1,12 +1,17 @@
 import pandas as pd
-from google_api import create_service
+from google.oauth2 import service_account
+import googleapiclient.discovery
 
-client_secret_file = 'client_secret.json'
+client_secret_file = 'foodinator_secret.json'
 API_NAME = 'places'
 API_VERSION = 'v1'
 SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
 
-service = create_service(client_secret_file, API_NAME, API_VERSION, SCOPES)
+credentials = service_account.Credentials.from_service_account_file(
+        client_secret_file, scopes=SCOPES)
+
+service = googleapiclient.discovery.build(API_NAME, API_VERSION, credentials=credentials)
+
 
 request_body = {
     "includedTypes": "restaurant",
