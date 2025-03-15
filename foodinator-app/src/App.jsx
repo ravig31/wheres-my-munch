@@ -4,6 +4,7 @@ import './App.css';
 import axios from 'axios';
 import RadiusSlider from './components/RadiusSlider';
 
+
 function App() {
   // State to track the current page/content
   const [currentPage, setCurrentPage] = useState('home'); // Can be 'home' or 'question'
@@ -13,9 +14,12 @@ function App() {
   const [error, setError] = useState(null);
 
   // State to track post code and coordinate  
-  const API_KEY = 'AIzaSyCcWRBSHekVmyjqfB3K4mLdkf5Eg-XmBzI'
+  const API_KEYS = {
+    "maps": `${process.env.REACT_APP_MAPS_API}`
+  }
   const [postcode, setPostcode] = useState('');
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+
 
   /**
    * Data relating to question
@@ -51,10 +55,11 @@ function App() {
   };
 
   const handleConvert = async () => {
+    console.log(typeof(API_KEY))
     try {
       // Make a request to the Geocoding API
       const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode},AU&key=${API_KEY}`
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode},AU&key=${API_KEYS.maps}`
       );
 
       // Extract latitude and longitude from the response
