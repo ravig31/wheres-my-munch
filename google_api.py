@@ -3,7 +3,7 @@ import datetime
 from google_auth_oauthlib.flow import InstalledAppFlow 
 from googleapiclient.discovery import build 
 from google.oauth2.credentials import Credentials 
-from google.auth.transport.requests import Requests
+from google.auth.transport.requests import Request
 
 def create_service(client_secret_file, api_name, api_version, *scopes, prefix=''):
     CLIENT_SECRET_FILE = client_secret_file
@@ -24,7 +24,7 @@ def create_service(client_secret_file, api_name, api_version, *scopes, prefix=''
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Requests())
+            creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
             creds = flow.run_local_server (port=0)
