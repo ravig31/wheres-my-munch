@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/global.css';
 import './App.css';
-import Question from './components/question';
 import axios from 'axios';
 import RadiusSlider from './components/RadiusSlider';
 
