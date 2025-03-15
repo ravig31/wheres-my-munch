@@ -1,12 +1,13 @@
-from flask import Flask 
+from flask import Flask, request 
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 CORS(app)
-
+# cors = CORS(app) # allow CORS for all domains on all routes.
+app.config['CORS_HEADERS'] = "Content-Type"
 sys_instruct = """
 
 You are Restaurant Genie, a fun and engaging assistant that helps indecisive users choose a restaurant. The user struggles with making decisions, so your job is to make the process playful and effortless while subtly narrowing down their preferences.
@@ -92,6 +93,20 @@ def processChoice(choice): ##TODO: add parameter to add in previous choises
         print(f"An error occurred: {e}")
     
     return response.text ##TODO: separate output as new question + options
+
+
+# Everything will be running on localhost:5000 -> just specify additional part to route to 
+# In this case we access post requests
+@app.route("/tester", methods=["POST", "GET"])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def testFunc():
+
+    data = request.json
+    if data is None:
+        return {"error": "Invalid JSON format or missing Content-Type header"}, 400
+    
+    print("Received data:", data["data"])  # Debugging
+    return "Processed"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -4,6 +4,7 @@ import './App.css';
 
 import ConfigPage from './components/ConfigPage'
 import Question from './components/Question'
+import APIService from './components/APIService';
 
 
 
@@ -51,13 +52,18 @@ function App() {
     
 };
 
+const data = "Hey hope this works!"
+const testPost = () => {
+  APIService.Tester({ data: "Hey hope this works!" });
+};
+
   return (
     <div className="app">
       {currentPage === 'home' && (
         <div className="home-prompt">
           <p className="question">Hungry?</p>
           <div className="button-container">
-            <button onClick={handleNext} className="choice-button">Yes</button>
+            <button onClick={testPost} className="choice-button">Yes</button>
             <button onClick={handleNext} className="choice-button">Yes</button>
           </div>
         </div>
