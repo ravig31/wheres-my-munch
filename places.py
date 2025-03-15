@@ -58,8 +58,7 @@ response = service.places().searchNearby(
 
 places_list = response['places']
 
-next_page_token = response.get("pagetoken")
-
+places_list[0]
 
 df = pd.DataFrame(places_list)
 
