@@ -3,10 +3,12 @@ import './styles/global.css';
 import './App.css';
 import axios from 'axios';
 import RadiusSlider from './components/RadiusSlider';
+import BusinessCard from './components/BusinessCard';
+import MapBox from './components/MapBox';
 
 function App() {
   // State to track the current page/content
-  const [currentPage, setCurrentPage] = useState('home'); // Can be 'home' or 'question'
+  const [currentPage, setCurrentPage] = useState('result'); // Can be 'home' or 'question'
 
   // State to track the current location
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -16,6 +18,19 @@ function App() {
   const API_KEY = 'AIzaSyCcWRBSHekVmyjqfB3K4mLdkf5Eg-XmBzI'
   const [postcode, setPostcode] = useState('');
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+
+  // Sample response
+  const suggestedRestaurant = {
+    name: "YOMG Glen Waverley",
+    openTime: "09:00",
+    closeTime: "21:00",
+    address: "65-67 Kingsway, Glen Waverley VIC 3150",
+    phone:"(03) 9560 2288",
+    long: 145.163390,
+    lat: -37.880307,
+    link: "https://www.google.com/maps/dir//65-67+Kingsway,+Glen+Waverley+VIC+3150/@-37.8802503,145.0809441,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x6ad63fbf6266e217:0xa9b91d10a0c0e1ea!2m2!1d145.1633451!2d-37.880279?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D",
+    blurb: "We picked YOMG Glen Waverley for you because you were after something casual and sweet in the area. It’s got the perfect mix of loaded burgers, crispy fries, and, of course, their famous frozen yogurt. Whether you're craving a shake, a snack, or just a chill spot to hang out, YOMG’s got you covered."
+  };
 
   /**
    * Data relating to question
@@ -48,6 +63,11 @@ function App() {
   // Handle moving to the next page
   const handleNext = () => {
     setCurrentPage('question'); // Move from home to the question page
+  };
+
+    // Handle going from question -> result
+    const handleResult = () => {
+      setCurrentPage('result');
   };
 
   const handleConvert = async () => {
@@ -141,6 +161,27 @@ function App() {
           <div className="app">
             <RadiusSlider onRadiusChange={handleRadiusChange} />
           </div>
+        </div>
+      )}
+
+      {currentPage === 'result' && (
+        <div className="result-page">
+          <p>We've found your perfect <br></br> match!</p>
+          <MapBox long={suggestedRestaurant.long} lat={suggestedRestaurant.lat} />
+        <BusinessCard
+          name={suggestedRestaurant.name}
+          openTime = {suggestedRestaurant.openTime}
+          closeTime = {suggestedRestaurant.closeTime}
+          address="65-67 Kingsway, Glen Waverley VIC 3150"
+          phone="0422 123 456"
+          link={suggestedRestaurant.link}
+        />
+
+          {/* <p className="result-description">
+          *{suggestedRestaurant.blurb}
+          </p>
+
+          <button onClick={handleNext}>Don't fw this? Keep searching</button> */}
         </div>
       )}
     </div>

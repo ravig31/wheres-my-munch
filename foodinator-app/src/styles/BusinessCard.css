@@ -1,0 +1,54 @@
+.business-card {
+    /* background-color: white; */
+    color: black;
+    width: 400px;
+    height: 220px;
+    padding: 20px; /* Ensures spacing inside */
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Ensures content starts from top */
+    align-items: center; /* ← this centers all child content horizontally */
+    text-align: center;
+    margin-left: auto;  /* Centers horizontally */
+    margin-right: auto; /* Centers horizontally */
+    margin-bottom: 20px;
+}
+
+.business-card h1 {
+    font-size: 45px;
+    font-weight: normal;
+    margin: 0;
+    line-height: 0.9;
+    padding-bottom: 5px; /* Adds space below the title */
+}
+  
+.business-card p {
+    font-size: 28px;
+    margin: 0;
+    line-height: 1.4;
+}
+  
+.business-card-address {
+    display: inline-block;
+    font-size: 28px;
+    color: black;
+    text-decoration: underline;
+    font-weight: normal;
+}
+    
+.business-card-address:hover {
+    text-decoration: none;
+    color: #1d3b1d; /* Darker green on hover */
+}
+  
+  .business-card .phone {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 14px;
+    color: #333;
+  }
+  
