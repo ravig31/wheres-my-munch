@@ -2,9 +2,10 @@ from flask import Flask
 import google.generativeai as genai
 from dotenv import load_dotenv
 import os
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 sys_instruct = """
 
@@ -69,17 +70,17 @@ model = genai.GenerativeModel(model_name="gemini-2.0-flash", )  # Initialize mod
 chat_session = model.start_chat(history=[])  # Start a chat session.
 response = chat_session.send_message(sys_instruct)
 
-@app.route("/initialPrompt/<location>")
+@app.route("/initialPrompt/<location>",methods=['GET','POST'])
 def sendInitial(location): ##TODO: add parameter to pass in location 
     response = ""
-    user_input = input("YOU: ") ##TODO: replace user_input with location parameters 
+    # user_input = input("YOU: ") ##TODO: replace user_input with location parameters 
     try:
-        response = chat_session.send_message(user_input)
+        response = chat_session.send_message("name me 5 athletes")
         print("Gemini:", response.text) ##TODO: remove
     except Exception as e:
         print(f"An error occurred: {e}")
-    
-    return response.text
+    print("connected")
+    return "SUCCESSFUL CONNECTION INITIAL FETCH"
 
 @app.route("/processSelection/<choice>")
 def processChoice(choice): ##TODO: add parameter to add in previous choises
