@@ -11,6 +11,7 @@ function RadiusSlider({ onRadiusChange }) {
 
   return (
     <div>
+        <h1>How far are you willing to travel?</h1>
       <label htmlFor="radius-slider">
         Select Radius: {radius} km
       </label>

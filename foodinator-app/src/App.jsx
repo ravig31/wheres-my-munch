@@ -55,7 +55,9 @@ function App() {
   };
 
   const handleConvert = async () => {
-    console.log(typeof(API_KEY))
+    console.log(typeof(API_KEYS))
+    console.log("Maps API Key:", process.env.REACT_APP_MAPS_API);
+    console.log("Environment Variables:", process.env); // Log all environment variables
     try {
       // Make a request to the Geocoding API
       const response = await axios.get(
@@ -115,22 +117,29 @@ function App() {
       
       {currentPage === 'question' && (
         <div className="home-prompt">
-          <button onClick={getLocation}>Use your current location.</button>
+          <h1>Before we <br></br> jump in...</h1>
+          <button onClick={getLocation}
+          style={{
+              background: "none",
+              border: "none",
+              padding: 0,
+              font: "inherit",
+              color: "black", // Customize the text color
+              cursor: "pointer",
+              textDecoration: "underline", // Optional: Add underline to make it look like a link
+            }}
+          >Use your current location.</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
-          {location.latitude && location.longitude && (
-            <div>
-              <p>Latitude: {location.latitude}</p>
-              <p>Longitude: {location.longitude}</p>
-            </div>
-          )}
           <div>
-          <p className="question">* Or tell us your postcode:</p>
-            <input
-              type="text"
-              placeholder="Enter Victorian postcode"
-              value={postcode}
-              onChange={(e) => setPostcode(e.target.value)}
-            />
+          <div style={{ display: "flex", alignItems: "center" }}>
+              <h1 style={{ margin: 0, marginRight: "10px" }}>Or tell us your postcode:</h1>
+              <input
+                type="text"
+                placeholder="Enter Victorian postcode"
+                value={postcode}
+                onChange={(e) => setPostcode(e.target.value)}
+              />
+            </div>
             <button onClick={handleConvert}>Convert</button>
 
             {error && <p style={{ color: 'red' }}>{error}</p>}
