@@ -1,11 +1,57 @@
-
+/* Center everything */
 .question-prompt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #2F4F2F; /* Dark green background */
-    color: white;
-    font-family: 'AppleGaramond', serif;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #2F4F2F; /* Dark green background */
+  color: white;
+  font-family: 'AppleGaramond', serif;
+  text-align: center;
+}
+
+/* Styling for the question text */
+.question-text {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+/* Grid layout for options */
+.question-buttons-list {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px 80px; /* Adjust spacing */
+}
+
+/* Button styling */
+.dynamic-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  font-family: 'AppleGaramond', serif;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align text to the left */
+  padding-left: 40px; /* Space for the asterisk */
+}
+
+/* Asterisk on the left */
+.dynamic-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  font-size: 3rem; /* Large asterisk */
+  color: white;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0; /* Hidden by default */
+}
+
+/* Show asterisk on hover */
+.dynamic-button:hover::before {
+  content: "*";
+  opacity: 1;
+}
