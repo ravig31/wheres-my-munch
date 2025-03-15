@@ -13,8 +13,8 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #2F4F2F; /* Dark green background */
-    color: white;
+    background-color: #FFFF; /* Dark green background */
+    color: black;
     font-family: 'AppleGaramond', serif;
   }
   
@@ -31,7 +31,7 @@
   .choice-button {
     background: none;
     border: none;
-    color: white;
+    color: black;
     font-size: 40px;
     cursor: pointer;
     font-family: 'AppleGaramond', serif;
