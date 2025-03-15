@@ -2,7 +2,7 @@ import pandas as pd
 from google.oauth2 import service_account
 import googleapiclient.discovery
 
-client_secret_file = 'foodinator_secret.json'
+client_secret_file = 'keys/foodinator_secret.json'
 API_NAME = 'places'
 API_VERSION = 'v1'
 SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
@@ -34,7 +34,6 @@ response = service.places().searchNearby(
 
 places_list = response['places']
 
-places_list[0]
 
 df = pd.DataFrame(places_list)
 df.to_csv('places_results.csv', index=False)
