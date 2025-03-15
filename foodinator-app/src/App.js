@@ -1,18 +1,10 @@
-import logo from './logo.svg';
+import './styles/global.css'
 import './App.css';
+import FoodPrompt from './components/foodPrompt';
 
 function App() {
   return (
-    <div className="App">
-      <header className="foodinator-body">
-        <p>Foodinie</p>
-        <p>Hungry?</p>
-        <div>
-          <button>Yes</button>
-          <button>No</button>
-        </div>
-      </header>
-    </div>
+    FoodPrompt()
   );
 }
 

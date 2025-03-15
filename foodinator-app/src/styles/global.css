@@ -1,0 +1,35 @@
+
+/* Food Prompt CSS */
+.food-prompt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #2F4F2F; /* Dark green background */
+    color: white;
+    font-family: serif;
+  }
+  
+  .question {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    gap: 50px; /* Space between buttons */
+  }
+  
+  .choice-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .choice-button:hover {
+    text-decoration: underline;
+  }
+  
