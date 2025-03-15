@@ -5,12 +5,12 @@ function App() {
   return (
     <div className="App">
       <header className="foodinator-body">
-        <p>
-          Foodinie
-        </p>
-        <button>
-          Hungry?
-        </button>
+        <p>Foodinie</p>
+        <p>Hungry?</p>
+        <div>
+          <button>Yes</button>
+          <button>No</button>
+        </div>
       </header>
     </div>
   );
