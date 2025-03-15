@@ -17,7 +17,7 @@ function App() {
   const API_KEYS = {
     "maps": `${process.env.REACT_APP_MAPS_API}`
   }
-  const [postcode, setPostcode] = useState('');
+  const [postcode, setPostcode] = useState(null);
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
 

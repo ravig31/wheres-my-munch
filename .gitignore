@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /foodinator-app/node_modules
 /foodinator-app/.env
 .env
 
+=======
+>>>>>>> 210893736fdd49fb8f9d2999cbfcba3b7c860c85
 tags
 static
 .vscode/*
@@ -210,3 +213,4 @@ Temporary Items
 # End of https://www.gitignore.io/api/osx
 .vscode/*
 .vs/
+# End of https://www.gitignore.io/api/osx
