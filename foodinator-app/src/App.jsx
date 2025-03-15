@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/global.css';
 import './App.css';
+import Question from './components/question';
 import axios from 'axios';
 import RadiusSlider from './components/RadiusSlider';
 
 function App() {
   // State to track the current page/content
   const [currentPage, setCurrentPage] = useState('home'); // Can be 'home' or 'question'
-
 
   // State to track the current location
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -17,6 +17,34 @@ function App() {
   const API_KEY = 'AIzaSyCcWRBSHekVmyjqfB3K4mLdkf5Eg-XmBzI'
   const [postcode, setPostcode] = useState('');
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+
+  /**
+   * Data relating to question
+   * 
+   * JSON Format:
+   * {
+   *  question: ...
+   *  options: []
+   * }
+   * 
+   */
+  const [questionData, setQuestionData] = useState(null); // Stores question data
+
+  /**
+   * UseEffect to get question data from API
+   */
+  useEffect(() => {
+    fetch('http://localhost:5000/example', {
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => setQuestionData(data))
+      .catch(error => console.log(error))
+
+  }, []) //in '[]' we can set when we make this get request?
 
   // Handle moving to the next page
   const handleNext = () => {
