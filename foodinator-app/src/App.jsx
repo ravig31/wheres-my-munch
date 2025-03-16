@@ -13,7 +13,7 @@ import RadiusSlider from './components/RadiusSlider';
 
 function App() {
   // State to track the current page/content
-  const [currentPage, setCurrentPage] = useState('test'); // Can be 'home' or 'question'
+  const [currentPage, setCurrentPage] = useState('prompt'); 
 
   // State to track the current location
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -35,9 +35,14 @@ function App() {
     blurb: "We picked YOMG Glen Waverley for you because you were after something casual and sweet in the area. It’s got the perfect mix of loaded burgers, crispy fries, and, of course, their famous frozen yogurt. Whether you're craving a shake, a snack, or just a chill spot to hang out, YOMG’s got you covered."
   };
 
-  const sampleQuestion = {
-    "question": "What is your name?",
-    "options": ["Arosh", "Ravi", "Finn", "Marcus"]
+  const LongQuestion = {
+    "question": "Which of these activities would you be most likely to partake in on the weekend?",
+    "options": ["A quick and easy errand", "A leisurely stroll", "An exciting adventure", "A peaceful escape"]
+  }
+
+  const ShortQuestion = {
+    "question": "How are you feeling?",
+    "options": ["Happy", "Sad", "Confused", "Silly"]
   }
 
   /**
@@ -70,7 +75,7 @@ function App() {
 
   // Handle moving to the next page
   const handleNext = () => {
-    setCurrentPage('question'); // Move from home to the question page
+    setCurrentPage('config');
   };
 
     // Handle going from question -> result
@@ -80,7 +85,7 @@ function App() {
 
      // Handle moving to the prompts page
     const handleStartConvo = () => {
-    setCurrentPage("test"); // Move from home to the question page
+    setCurrentPage("prompt"); // Move from home to the question page
       
   };
 
@@ -141,13 +146,11 @@ function App() {
           </div>
         </div>
       )}
-      {currentPage === 'question' && <ConfigPage  nextStageFunction={handleStartConvo}/>}
-      {/* {currentPage === 'test' && questionData && <Question  question={questionData.question} options={questionData.options}/>} */}
-      {currentPage === 'test' && <Question  question={sampleQuestion.question} options={sampleQuestion.options}/>}
-
+      {currentPage === 'config' && <ConfigPage  nextStageFunction={handleStartConvo}/>}
+      {currentPage === 'prompt' && <Question question={LongQuestion.question} options={LongQuestion.options} />}
 
       
-      {currentPage === 'question' && (
+      {currentPage === 'config' && (
         <div className="home-prompt">
           <button onClick={getLocation}>Use your current location.</button>
           {error && <p style={{ color: 'red' }}>{error}</p>}
