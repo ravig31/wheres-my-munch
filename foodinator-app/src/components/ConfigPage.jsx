@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RadiusSlider from './RadiusSlider';
+import "../styles/Config.css"; 
 
 
 const ConfigPage = ({ nextStageFunction }) => {
@@ -60,38 +61,15 @@ const ConfigPage = ({ nextStageFunction }) => {
         nextStageFunction()
     }
 
-    const handlePostcodeChange = (e) => {
-        setPostcode(e.target.value);
-        setUseCurrentLocation(false); // Deselect current location
-        setError("");
-      };
 
     
-      const fetchCoordinatesFromPostcode = async () => {
-        if (!postcode) return;
-        const apiKey = {
-            "maps": `${process.env.REACT_APP_MAPS_API}`
-        }
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=${apiKey}`;
-    
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
-          if (data.results.length > 0) {
-            const location = data.results[0].geometry.location;
-            setCoordinates({ lat: location.lat, lng: location.lng });
-        } else {
-            setError("Invalid postcode. Please try again.");
-          }
-        } catch (error) {
-          setError("Error fetching location data.");
-        }
-      };
 
     return (
         <div className="location-page">
             <div className="location-container">
-                <p className="title-text">Before we <br></br> jump in...</p>
+                <div class='title-container'>
+                    <p className="title-text">Before we <br></br> jump in...</p>
+                </div>
                 <p className="locationq-text">
                     <span
                         className="location-link"
@@ -100,36 +78,15 @@ const ConfigPage = ({ nextStageFunction }) => {
                         Use current location
                     </span>
                 </p>
-                <div className="postcode-container">
-                    <p className="locationq-text">Or tell us your post code:</p>
-                    <div className="inline-input-wrapper">
-                        <input
-                            type="text"
-                            value={postcode}
-                            onChange={handlePostcodeChange}
-                            onBlur={fetchCoordinatesFromPostcode}
-                            disabled={useCurrentLocation}
-                            placeholder="____"
-                            className="postcode-input-inline"
-                        />
-                    </div>
-                </div>
+
                 {error && <p className="error-text">{error}</p>}
-
+                {/* Slider Section */}
                 <div className="range-container">
-                    <label>How far do you want to travel?</label>
-                    <input
-                        type="range"
-                        min="5"
-                        max="50"
-                        value={selectedRadius}
-                        onChange={(e) => setSelectedRadius(e.target.value)}
-                        className="range-slider"
-                    />
-                    <p>Radius: {selectedRadius} km</p>
+                    <RadiusSlider onRadiusChange={handleRadiusChange} />
                 </div>
-
-                <button onClick={postLocation} className="start-convo-button">Continue to choices</button>
+                <div class='start-convo-container'>
+                  <button onClick={postLocation} className="start-convo-button">Continue to choices</button>
+                </div>
             </div>
         </div>
 

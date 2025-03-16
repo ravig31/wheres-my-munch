@@ -1,0 +1,29 @@
+
+.radius-header {
+    font-size: 20px;
+}
+
+.slider-container {
+    font-family: 'Shippori Antique B1', sans-serif;
+}
+
+/* For Chrome/Safari */
+#radius-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: black;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* For Firefox */
+  #radius-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: black;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
