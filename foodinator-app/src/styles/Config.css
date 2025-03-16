@@ -2,125 +2,125 @@
 /* Mobile-first approach */
 
 .location-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Full viewport height */
-    padding: 2rem 1rem; /* Responsive padding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+  padding: 2rem 1rem; /* Responsive padding */
 }
 
 .location-container {
-    font-size: 30px;
-    font-family: 'AppleGaramond', serif;
-    width: 90%;
-    max-width: 600px;
-    height: auto; /* Let content determine height */
-    padding: 3rem 2rem;
-    background: white;
-    border-radius: 1rem;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    gap: 2rem; /* Consistent spacing between elements */
-}
+  font-size: 30px;
+  font-family: 'AppleGaramond', serif;
+  width: 90%;
+  max-width: 600px;
+  height: auto; /* Let content determine height */
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 1rem;
   
-  .title-container {
-    padding-left: 10%;
-    margin-bottom: 2rem;
-    text-align: left;
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  gap: 2rem; /* Consistent spacing between elements */
+}
 
-  .title-text {
-    
-    font-size: 45px; /* Adjust size as needed */
+.title-container {
+  padding-left: 10%;
+  margin-bottom: 2rem;
+  text-align: left;
   }
 
-  .locationq-text {
-    padding-left: 10%;
-    text-decoration: underline;
-    text-align: left;
-  }
+.title-text {
+  
+  font-size: 45px; /* Adjust size as needed */
+}
 
-  /* Location Link */
+.locationq-text {
+  padding-left: 10%;
+  text-decoration: underline;
+  text-align: left;
+}
+
+/* Location Link */
 .location-link {
-    color: #000000;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
 
 }
 
 .location-link:hover {
-    color: #000000;
-    text-decoration: underline;
+  color: #000000;
+  text-decoration: underline;
 }
 
 .location-link:after {
-    margin-left: 0.5rem;
-    font-size: 0.9em;
+  margin-left: 0.5rem;
+  font-size: 0.9em;
 }
 
-  
-  .inline-input-wrapper {
-    position: relative;
-    flex: 1;
-    min-width: 120px;
-  }
-  
+
+.inline-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 120px;
+}
+
 
 /* Start convo button*/
 .start-convo-button {
-    background: none;
-    border: none;
-    padding: 0;
-    color: #000000; /* Match your link color */
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none; /* Remove default underline */
-    position: relative;
-    transition: color 0.2s ease;
-    font-family: 'AppleGaramond', serif;
-  }
-  
-  /* Underline effect */
-  .start-convo-button::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 1px;
-    background-color: currentColor;
-    transform-origin: right;
-    transition: transform 0.2s ease;
-  }
-  
-  /* Hover effects */
-  .start-convo-button:hover {
-    color: #1d4ed8; /* Darker blue on hover */
-  }
+  background: none;
+  border: none;
+  padding: 0;
+  color: #000000; /* Match your link color */
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none; /* Remove default underline */
+  position: relative;
+  transition: color 0.2s ease;
+  font-family: 'AppleGaramond', serif;
+}
 
-  /* Mobile adjustments */
-  @media (max-width: 375px) { /* iPhone 14 width */
-    
-    .inline-input-wrapper {
-        width: 100%;
-    }
-    
-    .range-slider {
-        width: 90%;
-        margin: 0 auto;
-    }
-    
-    .locationq-text {
-        margin: 8px 0;
-    }
+/* Underline effect */
+.start-convo-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform-origin: right;
+  transition: transform 0.2s ease;
+}
+
+/* Hover effects */
+.start-convo-button:hover {
+  color: #1d4ed8; /* Darker blue on hover */
+}
+
+/* Mobile adjustments */
+@media (max-width: 375px) { /* iPhone 14 width */
+  
+  .inline-input-wrapper {
+      width: 100%;
   }
   
-  /* Remove default input styling */
-  input {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  .range-slider {
+      width: 90%;
+      margin: 0 auto;
   }
+  
+  .locationq-text {
+      margin: 8px 0;
+  }
+}
+
+/* Remove default input styling */
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

@@ -167,17 +167,20 @@ function App() {
           </div>
         </div>
       )}
+      
       {currentPage === 'config' && (
         <div className="home-prompt">
           <button onClick={getLocation}>Use your current location.</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
+
+          {/* {error && <p style={{ color: 'red' }}>{error}</p>}
           {location.latitude && location.longitude && (
             <div>
               <p>Latitude: {location.latitude}</p>
               <p>Longitude: {location.longitude}</p>
             </div>
-          )}
-          <div>
+          )} */}
+          {/* <div>
             <p className="question">* Or tell us your postcode:</p>
             <input
               type="text"
@@ -196,7 +199,7 @@ function App() {
               </div>
             )}
             <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
-          </div>
+          </div> */}
           <div className="app">
             <RadiusSlider onRadiusChange={handleRadiusChange} />
           </div>
