@@ -71,7 +71,7 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ latitude: location.latitude, longitude: location.longitude }),
-            mode: 'cors'
+            mode: 'cors'    
         })
             .then(response => response.json())
             .then(data => {
