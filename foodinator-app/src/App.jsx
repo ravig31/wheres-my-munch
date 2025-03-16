@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './styles/global.css';
 import './App.css';
-import axios from 'axios';
-import RadiusSlider from './components/RadiusSlider';
+
+import ConfigPage from './components/ConfigPage'
+import Question from './components/Question'
+
+
 import BusinessCard from './components/BusinessCard';
 import MapBox from './components/MapBox';
 import logo from './assets/ascii-pizza.png';
@@ -126,6 +129,9 @@ function App() {
           </div>
         </div>
       )}
+      {currentPage === 'question' && <ConfigPage  nextStageFunction={handleStartConvo}/>}
+      {currentPage === 'test' && questionData && <Question  question={questionData.question} options={questionData.options}/>}
+
       
       {currentPage === 'question' && (
         <div className="home-prompt">
