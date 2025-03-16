@@ -65,7 +65,7 @@ const ConfigPage = ({ nextStageFunction }) => {
 
     
     const postLocation = () => {
-        fetch("http://118.138.114.203:5000/initialPrompt/test", {
+        fetch("http://118.138.114.203:5000/initialPrompt", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
