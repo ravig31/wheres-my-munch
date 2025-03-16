@@ -64,12 +64,12 @@ def process_location_data(location_data: Dict):
 
 
 def process_restaurant_data(restaurant_data : Dict) -> str:
-    restaurants = models.parse_restaurants_from_json(restaurant_data['places'])
+    restaurants = models.parse_restaurants_from_json(restaurant_data)
     open_restaurants = models.filter_open_now(restaurants)
     return  models.get_restaurant_info_string(open_restaurants) 
 
 
-def serialize_prompt(text):
+def serialize_response(text):
     """
     Serializes a multi-line prompt string into a dictionary.
 
@@ -83,32 +83,30 @@ def serialize_prompt(text):
     """
     lines = text.strip().split('\n')
     if len(lines) < 2:  # Need at least a prompt and one option
-        return None
+        return {"answer" : lines[0]}
 
     prompt = lines[0].strip()
     options = [line.strip() for line in lines[1:]]
 
     return {"prompt": prompt, "options": options}
 
-
 @app.route("/initialPrompt",methods=['GET','POST'])
 def sendInitial(): 
     response = ""
     try:
         lat, lng, radius = process_location_data(request.json) # process user's selected coordinates 
-        request_body = requestContructor(lat, lng, radius)
+        request_body = requestContructor(lat, lng, 10000)
         restaurant_data = service.places().searchNearby(
             body = request_body,
             fields = "places.displayName,places.primaryType,places.currentOpeningHours,places.currentOpeningHours,places.editorialSummary,places.location,places.googleMapsUri,places.priceLevel,places.priceRange,places.rating"
         ).execute()        
         
         tod_str = datetime.now().strftime("%H:%M:%S")
-        restaurants_str = process_restaurant_data(restaurant_data['places'])
+        restaurants_str = process_restaurant_data(restaurant_data.get('places', {}))
         final_sys_instruct = SYS_INSTRUCT.format(restaurants=restaurants_str, time_of_day=tod_str)
-
         response = chat_session.send_message(final_sys_instruct)
-        response = serialize_prompt(response.text)
-
+        response = serialize_response(response.text)
+        print(response)
         print("Gemini:", response) #TODO: remove
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -125,7 +123,8 @@ def processChoice(): ##TODO: add parameter to add in previous choises
         response = chat_session.send_message(data["selectedOption"])
         print("parsing to")
         # print(type(response.text))
-        response = serialize_prompt(response.text)
+        print("unsearialise:" , response.text)
+        response = serialize_response(response.text)
         print(response)
         print("successful connection")
         print("response")
@@ -152,4 +151,4 @@ def testFunc():
     return "Processed"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)
