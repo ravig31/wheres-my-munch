@@ -68,6 +68,29 @@ def process_restaurant_data(restaurant_data : Dict) -> str:
     open_restaurants = models.filter_open_now(restaurants)
     return  models.get_restaurant_info_string(open_restaurants) 
 
+
+def serialize_prompt(text):
+    """
+    Serializes a multi-line prompt string into a dictionary.
+
+    Args:
+        text: A multi-line string where the first line is the prompt
+              and the following lines are the options.
+
+    Returns:
+        A dictionary with the 'prompt' and 'options' keys, or None
+        if the input is invalid.
+    """
+    lines = text.strip().split('\n')
+    if len(lines) < 2:  # Need at least a prompt and one option
+        return None
+
+    prompt = lines[0].strip()
+    options = [line.strip() for line in lines[1:]]
+
+    return {"prompt": prompt, "options": options}
+
+
 @app.route("/initialPrompt",methods=['GET','POST'])
 def sendInitial(): 
     response = ""
@@ -84,8 +107,7 @@ def sendInitial():
         final_sys_instruct = SYS_INSTRUCT.format(restaurants=restaurants_str, time_of_day=tod_str)
 
         response = chat_session.send_message(final_sys_instruct)
-        response = json.loads(response.text)
-
+        response = serialize_prompt(response.text)
 
         print("Gemini:", response) #TODO: remove
     except Exception as e:
@@ -102,11 +124,12 @@ def processChoice(): ##TODO: add parameter to add in previous choises
     try:
         response = chat_session.send_message(data["selectedOption"])
         print("parsing to")
-        print(response.text)
         # print(type(response.text))
-        response = json.loads(response.text)
+        response = serialize_prompt(response.text)
+        print(response)
         print("successful connection")
         print("response")
+        
     except Exception as e:
         print(f"An error occurred: {e}")
     print("console output: ", response)
