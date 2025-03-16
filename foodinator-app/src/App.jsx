@@ -75,7 +75,7 @@ function App() {
 
 
   const postLocation = () => {
-    fetch("http://localhost:5000/initialPrompt", {
+    fetch("http://localhost:5001/initialPrompt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

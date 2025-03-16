@@ -6,7 +6,7 @@ const ButtonList = ({ items , updaterF }) => {
     // TODO: Change and test the dummy request
     const handleClick = (option) => {
         console.log("button click test")
-        fetch("http://localhost:5000/processSelection", {
+        fetch("http://localhost:5001/processSelection", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

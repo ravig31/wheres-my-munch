@@ -85,10 +85,10 @@ def serialize_response(text):
     if len(lines) < 2:  # Need at least a prompt and one option
         return {"answer" : lines[0]}
 
-    prompt = lines[0].strip()
+    question = lines[0].strip()
     options = [line.strip() for line in lines[1:]]
 
-    return {"prompt": prompt, "options": options}
+    return {"question": question, "options": options}
 
 @app.route("/initialPrompt",methods=['GET','POST'])
 def sendInitial(): 
