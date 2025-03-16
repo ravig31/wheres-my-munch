@@ -3,6 +3,8 @@
 /foodinator-app/.env
 .env
 
+flask-server/keys/*
+
 tags
 static
 .vscode/*
