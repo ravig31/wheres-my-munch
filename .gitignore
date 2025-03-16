@@ -1,5 +1,12 @@
+
+/foodinator-app/node_modules
+/foodinator-app/.env
+.env
+
 tags
 static
+.vscode/*
+
 # Created by https://www.gitignore.io/api/node
 
 ### Node ###
@@ -202,7 +209,9 @@ Temporary Items
 
 
 # End of https://www.gitignore.io/api/osx
-assets/*
 .vscode/*
+.vs/
+assets/*
+.env
 keys/*
 token.json
