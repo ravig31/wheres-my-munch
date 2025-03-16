@@ -1,6 +1,6 @@
 import ButtonList from "./buttonList";
 
-const Question = ({ question, options }) => {
+const Question = ({ question, options}) => {
     return (
         <div className="question-prompt">
             <p className="question-header">header</p>

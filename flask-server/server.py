@@ -73,30 +73,33 @@ chat_session = model.start_chat(history=[])  # Start a chat session.
 response = chat_session.send_message(sys_instruct)
 
 @app.route("/initialPrompt",methods=['GET','POST'])
-def sendInitial():
+def sendInitial(): 
     response = ""
     data = request.json ##process user's selected coordinates ##TODO: use coordinates to do initial filter
-    print(data)
     try:
         response = chat_session.send_message("begin with the questions for the user")
         response = json.loads(response.text)
-        print("Gemini:", response) ##TODO: remove
     except Exception as e:
         print(f"An error occurred: {e}")
     print("connected")
     return {"response": response}
 
 
-@app.route("/processSelection/<choice>")
-def processChoice(choice): ##TODO: add parameter to add in previous choises
+@app.route("/processSelection",methods=['GET','POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def processChoice(): ##TODO: add parameter to add in previous choises
     response = ""
+    data = request.json
     try:
-        response = chat_session.send_message(choice)
-        print("Gemini:", response.text)
+        response = chat_session.send_message(data["selectedOption"])
+        response = json.loads(response.text)
+        print("successful connection")
+        print("response")
     except Exception as e:
         print(f"An error occurred: {e}")
+    return {"response": response}
+    # return {"test":"Successful"}
     
-    return response.text ##TODO: separate output as new question + options
 
 
 # Everything will be running on localhost:5000 -> just specify additional part to route to 
