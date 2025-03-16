@@ -2,17 +2,12 @@
 /foodinator-app/node_modules
 /foodinator-app/.env
 .env
-
-flask-server/keys/*
-
 tags
 static
 .vscode/*
 .vs/
 assets/*
-
-# End of https://www.gitignore.io/api/osx
-flask-server/keys/*
+flask-server/keys/google_places_secret.json
 token.json
 
 
