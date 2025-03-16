@@ -16,7 +16,7 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
     const handleConvert = async () => {
-        console.log(typeof (API_KEY))
+        console.log(typeof (API_KEYS.maps)) // Added .maps to correctly log the key type
         try {
             // Make a request to the Geocoding API
             const response = await axios.get(
@@ -27,6 +27,7 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
             const { lat, lng } = response.data.results[0].geometry.location;
 
             // Update state with the coordinates
+            setLocation({ latitude: lat, longitude: lng }); // Update location state
             setCoordinates({ lat, lng });
             setError(null);
         } catch (err) {
@@ -65,23 +66,22 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
 
 
     const postLocation = () => {
+        // Use the location state for the POST request, which is updated either by getLocation or handleConvert
         fetch("http://localhost:5000/initialPrompt", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ latitude: location.latitude, longitude: location.longitude }),
-            mode: 'cors'    
+            body: JSON.stringify({ latitude: location.latitude, longitude: location.longitude, radius: selectedRadius }), // Include radius
+            mode: "cors"
         })
             .then(response => response.json())
             .then(data => {
-                console.log("Response from server:", data)
-                setterFunction(data);
-                nextStageFunction()
-            }
-            ).catch(error => console.error("Error:", error));
+                console.log(data);
+                nextStageFunction(); // Move nextStageFunction() inside the .then() to ensure it only runs after a successful POST
+            })
+            .catch(error => console.error("Error:", error));
 
-        //nextStageFunction()
     }
 
 
@@ -107,17 +107,19 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
 
                 {error && <p style={{ color: 'red' }}>{error}</p>}
 
-                {coordinates.lat && coordinates.lng && (
+                {/* This section might not be needed now that handleConvert updates 'location' */}
+                {/* {coordinates.lat && coordinates.lng && (
                     <div>
                         <p>Latitude: {coordinates.lat}</p>
                         <p>Longitude: {coordinates.lng}</p>
                     </div>
-                )}
+                )} */}
+                <div className="app">
+                    <RadiusSlider onRadiusChange={handleRadiusChange} />
+                </div>
                 <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
             </div>
-            <div className="app">
-                <RadiusSlider onRadiusChange={handleRadiusChange} />
-            </div>
+
         </div>
     )
 }
