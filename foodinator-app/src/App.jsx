@@ -88,24 +88,7 @@ function App() {
       
   };
 
-  const handleConvert = async () => {
-    try {
-      // Make a request to the Geocoding API
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode},AU&key=${API_KEY}`
-      );
-
-      // Extract latitude and longitude from the response
-      const { lat, lng } = response.data.results[0].geometry.location;
-
-      // Update state with the coordinates
-      setCoordinates({ lat, lng });
-      setError(null);
-    } catch (err) {
-      setError('Failed to convert postcode to coordinates. Please try again.');
-      console.error(err);
-    }
-  };
+  
 
   // Gets the users current location
   const getLocation = () => {
@@ -159,26 +142,7 @@ function App() {
               <p>Longitude: {location.longitude}</p>
             </div>
           )}
-          <div>
-          <p className="question">* Or tell us your postcode:</p>
-            <input
-              type="text"
-              placeholder="Enter Victorian postcode"
-              value={postcode}
-              onChange={(e) => setPostcode(e.target.value)}
-            />
-            <button onClick={handleConvert}>Convert</button>
-
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-
-            {coordinates.lat && coordinates.lng && (
-              <div>
-                <p>Latitude: {coordinates.lat}</p>
-                <p>Longitude: {coordinates.lng}</p>
-              </div>
-            )}
-            
-          </div>
+          
           <div className="app">
             <RadiusSlider onRadiusChange={handleRadiusChange} />
           </div>
