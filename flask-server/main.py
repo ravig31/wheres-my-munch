@@ -7,7 +7,7 @@ import datetime
 import models
 from prompt import SYS_INSTRUCT
 
-client_secret_file = 'keys/foodinator_secret.json'
+client_secret_file = 'keys/google_places_secret.json'
 API_NAME = 'places'
 API_VERSION = 'v1'
 SCOPES = ['https://www.googleapis.com/auth/cloud-platform']
@@ -17,7 +17,6 @@ credentials = service_account.Credentials.from_service_account_file(
 
 service = googleapiclient.discovery.build(API_NAME, API_VERSION, credentials=credentials)
 time = datetime.datetime.now().strftime("%H:%M:%S")
-
 
 load_dotenv()  # Load environment variables from .env file.
 
@@ -54,7 +53,7 @@ def main():
     open_restaurants_str = models.get_restaurant_info_string(open_restaurants)
 
     final_sys_instruct = SYS_INSTRUCT.format(restaurants=open_restaurants_str)
-    genai.configure(api_key="AIzaSyBQ30Ym4es4xTA21Q7X9aCSNzooV-V3yPE")  # Configure API key.
+    genai.configure(api_key=os.getenv())  # Configure API key.
     model = genai.GenerativeModel(model_name="gemini-2.0-flash", )  # Initialize model.
     chat_session = model.start_chat(history=[])  # Start a chat session.
     response = chat_session.send_message(final_sys_instruct)

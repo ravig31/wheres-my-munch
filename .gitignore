@@ -8,6 +8,13 @@ flask-server/keys/*
 tags
 static
 .vscode/*
+.vs/
+assets/*
+
+# End of https://www.gitignore.io/api/osx
+flask-server/keys/*
+token.json
+
 
 # Created by https://www.gitignore.io/api/node
 
@@ -210,15 +217,3 @@ Temporary Items
 .apdisk
 
 
-# End of https://www.gitignore.io/api/osx
-<<<<<<< HEAD
-.vscode/*
-.vs/
-# End of https://www.gitignore.io/api/osx
-.env
-=======
-assets/*
-.vscode/*
->>>>>>> googlePlaces
-keys/*
-token.json
