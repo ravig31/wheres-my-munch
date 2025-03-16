@@ -54,7 +54,7 @@ def main():
     open_restaurants_str = models.get_restaurant_info_string(open_restaurants)
 
     final_sys_instruct = SYS_INSTRUCT.format(restaurants=open_restaurants_str)
-    genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))  # Configure API key.
+    genai.configure(api_key="AIzaSyBQ30Ym4es4xTA21Q7X9aCSNzooV-V3yPE")  # Configure API key.
     model = genai.GenerativeModel(model_name="gemini-2.0-flash", )  # Initialize model.
     chat_session = model.start_chat(history=[])  # Start a chat session.
     response = chat_session.send_message(final_sys_instruct)

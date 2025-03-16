@@ -75,8 +75,8 @@ response = chat_session.send_message(sys_instruct)
 @app.route("/initialPrompt",methods=['GET','POST'])
 def sendInitial():
     response = ""
-    # data = request.json ##process user's selected coordinates ##TODO: use coordinates to do initial filter
-
+    data = request.json ##process user's selected coordinates ##TODO: use coordinates to do initial filter
+    print(data)
     try:
         response = chat_session.send_message("begin with the questions for the user")
         response = json.loads(response.text)
