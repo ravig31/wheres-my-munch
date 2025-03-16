@@ -86,6 +86,7 @@ function App() {
       .then(response => response.json())
       .then(data => {
         console.log("Response from server:", data)
+        setQuestionData(data);
         handleStartConvo();
       }
       ).catch(error => console.error("Error:", error));
@@ -109,6 +110,10 @@ function App() {
     setQuestionData(data);
   };
 
+  useEffect(() => {
+    console.log("Updated apiResponse:", questionData);
+  }, [questionData]);
+
   const data = "Hey hope this works!"
   const testPost = () => {
     APIService.Tester({ data: "Hey hope this works!" });
@@ -125,41 +130,42 @@ function App() {
           </div>
         </div>
       )}
-      <div className="home-prompt">
-            <button onClick={getLocation}>Use your current location.</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {location.latitude && location.longitude && (
-                <div>
-                    <p>Latitude: {location.latitude}</p>
-                    <p>Longitude: {location.longitude}</p>
-                </div>
-            )}
+      {currentPage === 'config' && (
+        <div className="home-prompt">
+          <button onClick={getLocation}>Use your current location.</button>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {location.latitude && location.longitude && (
             <div>
-                <p className="question">* Or tell us your postcode:</p>
-                <input
-                    type="text"
-                    placeholder="Enter Victorian postcode"
-                    value={postcode}
-                    onChange={(e) => setPostcode(e.target.value)}
-                />
-                <button onClick={handleConvert}>Convert</button>
-
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-
-                {coordinates.lat && coordinates.lng && (
-                    <div>
-                        <p>Latitude: {coordinates.lat}</p>
-                        <p>Longitude: {coordinates.lng}</p>
-                    </div>
-                )}
-                <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
+              <p>Latitude: {location.latitude}</p>
+              <p>Longitude: {location.longitude}</p>
             </div>
-            <div className="app">
-                <RadiusSlider onRadiusChange={handleRadiusChange} />
-            </div>
+          )}
+          <div>
+            <p className="question">* Or tell us your postcode:</p>
+            <input
+              type="text"
+              placeholder="Enter Victorian postcode"
+              value={postcode}
+              onChange={(e) => setPostcode(e.target.value)}
+            />
+            <button onClick={handleConvert}>Convert</button>
+
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+
+            {coordinates.lat && coordinates.lng && (
+              <div>
+                <p>Latitude: {coordinates.lat}</p>
+                <p>Longitude: {coordinates.lng}</p>
+              </div>
+            )}
+            <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
+          </div>
+          <div className="app">
+            <RadiusSlider onRadiusChange={handleRadiusChange} />
+          </div>
         </div>
-      {currentPage === 'prompt' && questionData && <Question question={questionData.question} options={questionData.options} />}
-
+      )}
+      {currentPage === 'prompt' && questionData && <Question question={questionData.response.question} options={questionData.response.options} />}
     </div>
   );
 }
