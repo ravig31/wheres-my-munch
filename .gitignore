@@ -212,11 +212,12 @@ Temporary Items
 <<<<<<< HEAD
 .vscode/*
 .vs/
-# End of https://www.gitignore.io/api/osx
+assets/*
 .env
 =======
 assets/*
 .vscode/*
 >>>>>>> googlePlaces
 keys/*
+token.jsonkeys/*
 token.json

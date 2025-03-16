@@ -1,14 +1,17 @@
 import ButtonList from "./buttonList";
+import ball from '../assets/ascii-ball.png';
+import '../styles/question.css';
 
 const Question = ({ question, options, updaterF}) => {
     return (
         <div className="question-prompt">
-            <p className="question-header">header</p>
+            <div className="container">
+            <img src={ball} alt="Logo" className="question-image" />
             <p className="question-text">{question}</p>
-            <p className="options-header">header options</p>
-            <div className="question-buttons-list">
-                <ButtonList items={options} updaterF={updaterF}/>
-            </div>
+        </div>
+        <div className="question-buttons-list">
+                <ButtonList items={options} />
+        </div>
         </div>
     );
 };
