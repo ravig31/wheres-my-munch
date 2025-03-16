@@ -36,3 +36,79 @@
     transform: rotate(360deg);
   }
 }
+
+/* Mobile-first approach */
+.location-container {
+  max-width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-family: 'Shippori Antique B1', sans-serif;
+
+}
+
+.title-text {
+  font-size: 38px; /* Adjust size as needed */
+}
+
+.postcode-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  margin: 15px 0;
+}
+
+.inline-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 120px;
+}
+
+.postcode-input-inline {
+  width: 35px;
+  border: none;
+  border-bottom: 1px solid #000;
+  border-radius: 0;
+  padding: 4px 0;
+  background: transparent;
+  outline: none;
+  font-size: inherit;
+  box-shadow: none;
+}
+
+.postcode-input-inline::placeholder {
+  color: transparent;
+}
+
+/* Hide input box when not focused or filled */
+.postcode-input-inline:not(:focus):not(:valid) {
+  border-bottom: 1px dashed #666;
+}
+
+/* Mobile adjustments */
+@media (max-width: 375px) { /* iPhone 14 width */
+  .postcode-container {
+      flex-direction: column;
+      gap: 4px;
+  }
+  
+  .inline-input-wrapper {
+      width: 100%;
+  }
+  
+  .range-slider {
+      width: 90%;
+      margin: 0 auto;
+  }
+  
+  .locationq-text {
+      margin: 8px 0;
+  }
+}
+
+/* Remove default input styling */
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

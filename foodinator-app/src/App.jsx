@@ -10,8 +10,6 @@ import Question from './components/Question'
 function App() {
   // State to track the current page/content
   const [currentPage, setCurrentPage] = useState('home'); // Can be 'home' or 'question'
-
-
   /**
    * Data relating to question
    * 
