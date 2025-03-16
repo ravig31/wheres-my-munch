@@ -7,34 +7,17 @@ const ConfigPage = ({ nextStageFunction }) => {
     // State to track the current location
     const [location, setLocation] = useState({ latitude: null, longitude: null });
     const [error, setError] = useState(null);
+    const [locationError, setLocationError] = useState(null);
+    const [postcode, setPostcode] = useState(null);
+    const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+    const [selectedRadius, setSelectedRadius] = useState(10); // Default radius: 10 km
 
+    const [useCurrentLocation, setUseCurrentLocation] = useState(false);
+    
     // State to track post code and coordinate  
     const API_KEYS = {
         "maps": `${process.env.REACT_APP_MAPS_API}`
     }
-    const [postcode, setPostcode] = useState(null);
-    const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
-
-    const handleConvert = async () => {
-        console.log(typeof (API_KEY))
-        try {
-            // Make a request to the Geocoding API
-            const response = await axios.get(
-                `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode},AU&key=${API_KEYS.maps}`
-            );
-
-            // Extract latitude and longitude from the response
-            const { lat, lng } = response.data.results[0].geometry.location;
-
-            // Update state with the coordinates
-            setCoordinates({ lat, lng });
-            setError(null);
-        } catch (err) {
-            setError('Failed to convert postcode to coordinates. Please try again.');
-            console.error(err);
-        }
-    };
-
     // Gets the users current location
     const getLocation = () => {
         if (navigator.geolocation) {
@@ -57,12 +40,10 @@ const ConfigPage = ({ nextStageFunction }) => {
     };
 
 
-    const [selectedRadius, setSelectedRadius] = useState(10); // Default radius: 10 km
-
+    // Changes radius based on slider
     const handleRadiusChange = (newRadius) => {
         setSelectedRadius(newRadius);
     };
-
     
     const postLocation = () => {
         fetch("http://118.138.114.203:5000/initialPrompt/test", {
@@ -79,40 +60,79 @@ const ConfigPage = ({ nextStageFunction }) => {
         nextStageFunction()
     }
 
+    const handlePostcodeChange = (e) => {
+        setPostcode(e.target.value);
+        setUseCurrentLocation(false); // Deselect current location
+        setError("");
+      };
+
+    
+      const fetchCoordinatesFromPostcode = async () => {
+        if (!postcode) return;
+        const apiKey = {
+            "maps": `${process.env.REACT_APP_MAPS_API}`
+        }
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${postcode}&key=${apiKey}`;
+    
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          if (data.results.length > 0) {
+            const location = data.results[0].geometry.location;
+            setCoordinates({ lat: location.lat, lng: location.lng });
+        } else {
+            setError("Invalid postcode. Please try again.");
+          }
+        } catch (error) {
+          setError("Error fetching location data.");
+        }
+      };
+
     return (
-        <div className="home-prompt">
-            <button onClick={getLocation}>Use your current location.</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {location.latitude && location.longitude && (
-                <div>
-                    <p>Latitude: {location.latitude}</p>
-                    <p>Longitude: {location.longitude}</p>
-                </div>
-            )}
-            <div>
-                <p className="question">* Or tell us your postcode:</p>
-                <input
-                    type="text"
-                    placeholder="Enter Victorian postcode"
-                    value={postcode}
-                    onChange={(e) => setPostcode(e.target.value)}
-                />
-                <button onClick={handleConvert}>Convert</button>
-
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-
-                {coordinates.lat && coordinates.lng && (
-                    <div>
-                        <p>Latitude: {coordinates.lat}</p>
-                        <p>Longitude: {coordinates.lng}</p>
+        <div className="location-page">
+            <div className="location-container">
+                <p className="title-text">Before we <br></br> jump in...</p>
+                <p className="locationq-text">
+                    <span
+                        className="location-link"
+                        onClick={getLocation}
+                    >
+                        Use current location
+                    </span>
+                </p>
+                <div className="postcode-container">
+                    <p className="locationq-text">Or tell us your post code:</p>
+                    <div className="inline-input-wrapper">
+                        <input
+                            type="text"
+                            value={postcode}
+                            onChange={handlePostcodeChange}
+                            onBlur={fetchCoordinatesFromPostcode}
+                            disabled={useCurrentLocation}
+                            placeholder="____"
+                            className="postcode-input-inline"
+                        />
                     </div>
-                )}
-                <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
-            </div>
-            <div className="app">
-                <RadiusSlider onRadiusChange={handleRadiusChange} />
+                </div>
+                {error && <p className="error-text">{error}</p>}
+
+                <div className="range-container">
+                    <label>How far do you want to travel?</label>
+                    <input
+                        type="range"
+                        min="5"
+                        max="50"
+                        value={selectedRadius}
+                        onChange={(e) => setSelectedRadius(e.target.value)}
+                        className="range-slider"
+                    />
+                    <p>Radius: {selectedRadius} km</p>
+                </div>
+
+                <button onClick={postLocation} className="start-convo-button">Continue to choices</button>
             </div>
         </div>
+
     )
 }
 
