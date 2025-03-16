@@ -20,7 +20,6 @@ function App() {
   const [error, setError] = useState(null);
 
   // State to track post code and coordinate  
-  const API_KEY = 'AIzaSyCcWRBSHekVmyjqfB3K4mLdkf5Eg-XmBzI'
   const [postcode, setPostcode] = useState('');
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
