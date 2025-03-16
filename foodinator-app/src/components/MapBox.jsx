@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWxleGlzbG92ZXNtYXBib3giLCJhIjoiY204YTZsbHg0MGw0NTJsb2U5aHQxMmFxdCJ9.rrkiFebFzzUp2y1D6VBVxg'; //lol
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_KEY;
 
 function MapBox({ long, lat }) {
   const mapContainerRef = useRef(null);
