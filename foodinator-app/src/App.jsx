@@ -5,10 +5,11 @@ import './App.css';
 import ConfigPage from './components/ConfigPage'
 import Question from './components/Question'
 
-
 import BusinessCard from './components/BusinessCard';
 import MapBox from './components/MapBox';
 import logo from './assets/ascii-pizza.png';
+import axios from 'axios';
+import RadiusSlider from './components/RadiusSlider';
 
 function App() {
   // State to track the current page/content
@@ -70,6 +71,12 @@ function App() {
     // Handle going from question -> result
     const handleResult = () => {
       setCurrentPage('result');
+  };
+
+     // Handle moving to the prompts page
+    const handleStartConvo = () => {
+    setCurrentPage("test"); // Move from home to the question page
+      
   };
 
   const handleConvert = async () => {
