@@ -17,7 +17,6 @@ function App() {
   // State to track the current page/content
   const [currentPage, setCurrentPage] = useState('home'); // Can be 'home' or 'question'
 
-
   // Sample response
   const suggestedRestaurant = {
     name: "YOMG Glen Waverley",
@@ -99,9 +98,6 @@ function App() {
       )}
       {currentPage === 'config' && <ConfigPage  nextStageFunction={handleStartConvo}/>}
       {currentPage === 'prompt' && <Question question={LongQuestion.question} options={LongQuestion.options} />}
-
-      
-
       {currentPage === 'result' && (
         <div class="container">
         <div className="result-page">

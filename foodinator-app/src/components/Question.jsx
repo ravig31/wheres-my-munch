@@ -1,6 +1,6 @@
 import ButtonList from "./buttonList";
 import ball from '../assets/ascii-ball.png';
-import '../styles/Question.css';
+import '../styles/question.css';
 
 const Question = ({ question, options }) => {
     return (

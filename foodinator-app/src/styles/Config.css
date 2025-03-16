@@ -11,14 +11,14 @@
 
 .location-container {
     font-size: 30px;
-    font-family: 'Shippori Antique B1', sans-serif;
+    font-family: 'AppleGaramond', serif;
     width: 90%;
     max-width: 600px;
     height: auto; /* Let content determine height */
     padding: 3rem 2rem;
     background: white;
     border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
     display: flex;
     flex-direction: column;
     justify-content: center; /* Center content vertically */
@@ -80,6 +80,7 @@
     text-decoration: none; /* Remove default underline */
     position: relative;
     transition: color 0.2s ease;
+    font-family: 'AppleGaramond', serif;
   }
   
   /* Underline effect */

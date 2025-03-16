@@ -20,7 +20,7 @@ function RadiusSlider({ onRadiusChange }) {
       <input
         id="radius-slider"
         type="range"
-        min=".5"
+        min="1"
         max="15"
         value={radius}
         onChange={handleSliderChange}
