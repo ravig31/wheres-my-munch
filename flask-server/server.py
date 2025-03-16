@@ -41,6 +41,7 @@ Reveal the restaurant choice in a fun and creative way, such as:
 "Your food destiny is clear! Tonight, you're dining at Golden Elephant Curry—where bold flavors and warm spices will wrap you up like a delicious adventure!
 
 Each time you provide an answer, return the next question prompt and options as a dictionary as a string, in the form "{"question": question, "options": options}", with options as an array type
+If you are providing the final answer, put it in a dictionary as well in the following form "{"answer": answer}"
 
 Italian: "Bella Luna Trattoria" , "Pastaio's Paradise", "The Roman Hearth", "Vesuvio Pizzeria", "Olive Branch Osteria"
 
@@ -82,6 +83,7 @@ def sendInitial():
     except Exception as e:
         print(f"An error occurred: {e}")
     print("connected")
+    print(response)
     return {"response": response}
 
 
@@ -92,11 +94,15 @@ def processChoice(): ##TODO: add parameter to add in previous choises
     data = request.json
     try:
         response = chat_session.send_message(data["selectedOption"])
+        print("parsing to")
+        print(response.text)
+        # print(type(response.text))
         response = json.loads(response.text)
         print("successful connection")
         print("response")
     except Exception as e:
         print(f"An error occurred: {e}")
+    print("console output: ", response)
     return {"response": response}
     # return {"test":"Successful"}
     
@@ -116,4 +122,4 @@ def testFunc():
     return "Processed"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

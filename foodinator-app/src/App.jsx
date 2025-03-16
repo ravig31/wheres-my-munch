@@ -106,8 +106,14 @@ function App() {
   };
 
   const updatePrompt = (data) => {
-    console.log(`This is the newest response data: ${data.question}`)
-    setQuestionData(data);
+    console.log(data.response)
+    if ("answer" in data.response){
+        console.log(`The answer is: ${data.response}`)
+        setCurrentPage('config')
+    }
+    else{
+      setQuestionData(data);
+    }
   };
 
   useEffect(() => {
@@ -165,7 +171,7 @@ function App() {
           </div>
         </div>
       )}
-      {currentPage === 'prompt' && questionData && <Question question={questionData.response.question} options={questionData.response.options} />}
+      {currentPage === 'prompt' && questionData && <Question question={questionData.response.question} options={questionData.response.options} updaterF={updatePrompt}/>}
     </div>
   );
 }

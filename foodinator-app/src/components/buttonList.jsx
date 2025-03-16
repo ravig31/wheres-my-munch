@@ -1,6 +1,6 @@
 import React from "react";
 
-const ButtonList = ({ items }) => {
+const ButtonList = ({ items , updaterF }) => {
 
     // Function to handle button click and send data to Flask
     // TODO: Change and test the dummy request
@@ -15,7 +15,11 @@ const ButtonList = ({ items }) => {
             mode: 'cors'
         })
             .then(response => response.json())
-            .then(data => console.log(`Connection Dones: ${data.response.question}`))
+            .then(data => {
+                console.log("attempting to display next prompt:")
+                console.log(`Connection Dones: ${data.response.question}`)
+                updaterF(data)
+            })
             .catch(error => console.error("Error:", error));
     };
 
