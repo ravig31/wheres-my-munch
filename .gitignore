@@ -212,3 +212,16 @@ Temporary Items
 .apdisk
 
 
+# End of https://www.gitignore.io/api/osx
+<<<<<<< HEAD
+.vscode/*
+.vs/
+assets/*
+.env
+=======
+assets/*
+.vscode/*
+>>>>>>> googlePlaces
+keys/*
+token.jsonkeys/*
+token.json

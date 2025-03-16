@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import RadiusSlider from './RadiusSlider';
+import "../styles/Config.css"; 
 
 
 const ConfigPage = ({ nextStageFunction, setterFunction }) => {
     // State to track the current location
     const [location, setLocation] = useState({ latitude: null, longitude: null });
     const [error, setError] = useState(null);
+    const [locationError, setLocationError] = useState(null);
+    const [postcode, setPostcode] = useState(null);
+    const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+    const [selectedRadius, setSelectedRadius] = useState(10); // Default radius: 10 km
 
+    const [useCurrentLocation, setUseCurrentLocation] = useState(false);
+    
     // State to track post code and coordinate  
     const API_KEYS = {
         "maps": `${process.env.REACT_APP_MAPS_API}`
@@ -58,12 +65,10 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
     };
 
 
-    const [selectedRadius, setSelectedRadius] = useState(10); // Default radius: 10 km
-
+    // Changes radius based on slider
     const handleRadiusChange = (newRadius) => {
         setSelectedRadius(newRadius);
     };
-
 
     const postLocation = () => {
         // Use the location state for the POST request, which is updated either by getLocation or handleConvert
@@ -85,42 +90,36 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
     }
 
 
+
+
+    
+
     return (
-        <div className="home-prompt">
-            <button onClick={getLocation}>Use your current location.</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {location.latitude && location.longitude && (
-                <div>
-                    <p>Latitude: {location.latitude}</p>
-                    <p>Longitude: {location.longitude}</p>
+        <div className="location-page">
+            <div className="location-container">
+                <div class='title-container'>
+                    <p className="title-text">Before we <br></br> jump in...</p>
                 </div>
-            )}
-            <div>
-                <p className="question">* Or tell us your postcode:</p>
-                <input
-                    type="text"
-                    placeholder="Enter Victorian postcode"
-                    value={postcode}
-                    onChange={(e) => setPostcode(e.target.value)}
-                />
-                <button onClick={handleConvert}>Convert</button>
+                <p className="locationq-text">
+                    <span
+                        className="location-link"
+                        onClick={getLocation}
+                    >
+                        Use current location
+                    </span>
+                </p>
 
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-
-                {/* This section might not be needed now that handleConvert updates 'location' */}
-                {/* {coordinates.lat && coordinates.lng && (
-                    <div>
-                        <p>Latitude: {coordinates.lat}</p>
-                        <p>Longitude: {coordinates.lng}</p>
-                    </div>
-                )} */}
-                <div className="app">
+                {error && <p className="error-text">{error}</p>}
+                {/* Slider Section */}
+                <div className="range-container">
                     <RadiusSlider onRadiusChange={handleRadiusChange} />
                 </div>
-                <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
+                <div class='start-convo-container'>
+                  <button onClick={postLocation} className="start-convo-button">Continue to choices</button>
+                </div>
             </div>
-
         </div>
+
     )
 }
 
