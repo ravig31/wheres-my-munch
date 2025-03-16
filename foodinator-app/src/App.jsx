@@ -7,13 +7,13 @@ import Question from './components/Question'
 
 import BusinessCard from './components/BusinessCard';
 import MapBox from './components/MapBox';
-import logo from './assets/ascii-pizza.png';
+import logo from './assets/ascii-icespice.png';
 import axios from 'axios';
 import RadiusSlider from './components/RadiusSlider';
 
 function App() {
   // State to track the current page/content
-  const [currentPage, setCurrentPage] = useState('prompt'); 
+  const [currentPage, setCurrentPage] = useState('result'); 
 
   // State to track the current location
   const [location, setLocation] = useState({ latitude: null, longitude: null });
@@ -153,7 +153,7 @@ function App() {
         <div class="container">
         <div className="result-page">
           <img src={logo} alt="Logo" className="result-logo" />
-          <p>We've found your perfect <br></br> match!</p>
+          <p>Here's your munch</p>
           <MapBox long={suggestedRestaurant.long} lat={suggestedRestaurant.lat} />
         <BusinessCard
           name={suggestedRestaurant.name}
