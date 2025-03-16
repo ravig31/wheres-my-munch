@@ -36,7 +36,7 @@ function App() {
   };
 
   const LongQuestion = {
-    "question": "Which of these activities would you be most likely to partake in on the weekend?",
+    "question": "Choose one of the following optionsss I'm trying to make this question longer and longer and longer",
     "options": ["A quick and easy errand", "A leisurely stroll", "An exciting adventure", "A peaceful escape"]
   }
 
