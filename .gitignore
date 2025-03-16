@@ -7,7 +7,7 @@ static
 .vscode/*
 .vs/
 assets/*
-flask-server/keys/google_places_secret.json
+flask-server/keys/*
 token.json
 
 
