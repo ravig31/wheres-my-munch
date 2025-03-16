@@ -27,25 +27,46 @@
 .App-link {
   color: #61dafb;
 }
+
+/* Container for max width on results page */
+.container {
+  width: 90%;
+  max-width: 500px; 
+  margin: 0 auto;
+}
+
 .result-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .result-page p {
-  font-size: 50px;
+  font-size: clamp(24px, 5vw, 40px); /* scales with screen width */
+  margin-bottom: 15px;
+  margin-top: 10px;
 }
+
+.result-logo {
+  margin-top: 50px;
+  margin-left: -15px;
+  height: 100px;
+}
+
 .map-container {
   width: 100%;
-  max-width: 350px;
-  height: 250px;
-
-  margin-top: 20px;
-  margin-bottom: 30px;
-  border-radius: 10px;
+  height: auto; 
+  aspect-ratio: 16 / 9; 
+  margin-top: 0px;
+  margin-bottom: 20px;
+  border-radius: 30px;
   overflow: hidden;
+}
+
+.result-page p.result-description {
+  font-size: 1.2rem;
+  width: 100%;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {

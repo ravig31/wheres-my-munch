@@ -5,6 +5,7 @@ import axios from 'axios';
 import RadiusSlider from './components/RadiusSlider';
 import BusinessCard from './components/BusinessCard';
 import MapBox from './components/MapBox';
+import logo from './assets/ascii-pizza.png';
 
 function App() {
   // State to track the current page/content
@@ -22,8 +23,6 @@ function App() {
   // Sample response
   const suggestedRestaurant = {
     name: "YOMG Glen Waverley",
-    openTime: "09:00",
-    closeTime: "21:00",
     address: "65-67 Kingsway, Glen Waverley VIC 3150",
     phone:"(03) 9560 2288",
     long: 145.163390,
@@ -165,23 +164,24 @@ function App() {
       )}
 
       {currentPage === 'result' && (
+        <div class="container">
         <div className="result-page">
+          <img src={logo} alt="Logo" className="result-logo" />
           <p>We've found your perfect <br></br> match!</p>
           <MapBox long={suggestedRestaurant.long} lat={suggestedRestaurant.lat} />
         <BusinessCard
           name={suggestedRestaurant.name}
-          openTime = {suggestedRestaurant.openTime}
-          closeTime = {suggestedRestaurant.closeTime}
-          address="65-67 Kingsway, Glen Waverley VIC 3150"
-          phone="0422 123 456"
+          address={suggestedRestaurant.address}
+          phone={suggestedRestaurant.phone}
           link={suggestedRestaurant.link}
         />
-
+        <p className="result-description">({suggestedRestaurant.blurb})</p>
           {/* <p className="result-description">
           *{suggestedRestaurant.blurb}
           </p>
 
           <button onClick={handleNext}>Don't fw this? Keep searching</button> */}
+        </div>
         </div>
       )}
     </div>
