@@ -3,7 +3,7 @@ import axios from 'axios';
 import RadiusSlider from './RadiusSlider';
 
 
-const ConfigPage = ({ nextStageFunction }) => {
+const ConfigPage = ({ nextStageFunction, setterFunction }) => {
     // State to track the current location
     const [location, setLocation] = useState({ latitude: null, longitude: null });
     const [error, setError] = useState(null);
@@ -63,21 +63,27 @@ const ConfigPage = ({ nextStageFunction }) => {
         setSelectedRadius(newRadius);
     };
 
-    
+
     const postLocation = () => {
-        fetch("http://118.138.114.203:5000/initialPrompt", {
+        fetch("http://localhost:5000/initialPrompt", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ latitude:location.latitude ,longitude:location.longitude }),
+            body: JSON.stringify({ latitude: location.latitude, longitude: location.longitude }),
+            mode: 'cors'
         })
             .then(response => response.json())
-            .then(data => console.log("Response from server:", data))
-            .catch(error => console.error("Error:", error));
-        
-        nextStageFunction()
+            .then(data => {
+                console.log("Response from server:", data)
+                setterFunction(data);
+                nextStageFunction()
+            }
+            ).catch(error => console.error("Error:", error));
+
+        //nextStageFunction()
     }
+
 
     return (
         <div className="home-prompt">
