@@ -23,7 +23,7 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
     const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
 
     const handleConvert = async () => {
-        console.log(typeof (API_KEY))
+        console.log(typeof (API_KEYS.maps)) // Added .maps to correctly log the key type
         try {
             // Make a request to the Geocoding API
             const response = await axios.get(
@@ -34,6 +34,7 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
             const { lat, lng } = response.data.results[0].geometry.location;
 
             // Update state with the coordinates
+            setLocation({ latitude: lat, longitude: lng }); // Update location state
             setCoordinates({ lat, lng });
             setError(null);
         } catch (err) {
@@ -69,7 +70,6 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
         setSelectedRadius(newRadius);
     };
 
-    
     const postLocation = () => {
         // Use the location state for the POST request, which is updated either by getLocation or handleConvert
         fetch("http://localhost:5000/initialPrompt", {
@@ -109,18 +109,14 @@ const ConfigPage = ({ nextStageFunction, setterFunction }) => {
                     </span>
                 </p>
 
-                {error && <p style={{ color: 'red' }}>{error}</p>}
-
-                {coordinates.lat && coordinates.lng && (
-                    <div>
-                        <p>Latitude: {coordinates.lat}</p>
-                        <p>Longitude: {coordinates.lng}</p>
-                    </div>
-                )}
-                <button onClick={postLocation} className="start-convo-button">Continue to Choices</button>
-            </div>
-            <div className="app">
-                <RadiusSlider onRadiusChange={handleRadiusChange} />
+                {error && <p className="error-text">{error}</p>}
+                {/* Slider Section */}
+                <div className="range-container">
+                    <RadiusSlider onRadiusChange={handleRadiusChange} />
+                </div>
+                <div class='start-convo-container'>
+                  <button onClick={postLocation} className="start-convo-button">Continue to choices</button>
+                </div>
             </div>
         </div>
 

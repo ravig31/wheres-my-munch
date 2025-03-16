@@ -1,22 +1,22 @@
 import React from "react";
 
-const ButtonList = ({ items , updaterF }) => {
+const ButtonList = ({ items, updaterF }) => {
   const handleClick = (option) => {
-        console.log("button click test")
+    console.log("button click test")
     fetch("http://localhost:5000/processSelection", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ selectedOption: option }),
-            mode: 'cors'
+      mode: 'cors'
     })
       .then((response) => response.json())
       .then((data) => {
-                console.log("attempting to display next prompt:")
-                console.log(`Connection Dones: ${data.response.question}`)
-                updaterF(data)
-            })
+        console.log("attempting to display next prompt:")
+        console.log(`Connection Dones: ${data.response.question}`)
+        updaterF(data)
+      })
       .catch((error) => console.error("Error:", error));
   };
 

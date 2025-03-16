@@ -10,7 +10,7 @@ const Question = ({ question, options, updaterF}) => {
             <p className="question-text">{question}</p>
         </div>
         <div className="question-buttons-list">
-                <ButtonList items={options} />
+                <ButtonList items={options} updaterF={updaterF} />
         </div>
         </div>
     );
