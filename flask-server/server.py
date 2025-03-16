@@ -61,7 +61,7 @@ American: "The Blue Plate Diner", "Smokehouse & Vine", "Homestead Grill", "Coast
 Vietnamese: "Pho Lantern", "Saigon Street Eats", "The Banh Mi Bicycle", "Hanoi Harvest", "Mekong Morsels
 
 """
-genai.configure(api_key="AIzaSyBQ30Ym4es4xTA21Q7X9aCSNzooV-V3yPE")  # Configure API key.
+genai.configure()  # Configure API key.
 global model
 global chat_session
 global response
