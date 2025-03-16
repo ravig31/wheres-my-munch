@@ -211,7 +211,7 @@ Temporary Items
 # End of https://www.gitignore.io/api/osx
 .vscode/*
 .vs/
-# End of https://www.gitignore.io/api/osx
+assets/*
 .env
 keys/*
 token.json
